@@ -1,0 +1,61 @@
+{% include 'head.html' %}
+<body>
+
+<center><h1>{{title}} Checklist <br> {{date}}</h1></center>
+<div class="container-fluid">
+<form action="/noon" name="form1" method="POST">
+<input type="hidden" name="Start Time" id="starttime" value="{{ time }}"> <p>Start Time: {{ time }}</p>
+		<ol>
+		{% for task in data recursive %}
+		<li>
+		<div name="{{task.title}}">
+			<p><b>{{task.title}} </b>-<br> {{task.detail|safe}}
+			<div class="inputs" >
+			<fieldset>
+			{% if task['output'] is defined %}
+				{% for output in task['output']%}
+				<legend>{{output}}:</legend>
+					<label form="form1">
+					<textarea class="{{task.title}}" name="{{task.title}}:{{output|safe}}" value="{{task.title}}.output" id="{{ loop.index }}.output" cols="60" rows="3" ></textarea>
+					</label>
+				{% endfor %}
+			{% endif %}
+			{% if task['checks'] is defined %}
+				{% for check in task['checks'] recursive %}
+					{% if 'band' in check %}
+						{% set rand =  range(1,48) | random %}
+						{% set digits = "%02d" | format(rand) %}
+						{% set check = "string1" + digits|string%}
+					{% endif %}
+					{% if 'orand' in check %}
+						{% set rand =  range(1,48) | random %}
+						{% set digits = "%02d" | format(rand) %}
+						{% set check = "string2" + digits|string%}
+					{% endif %}
+				<ul>
+				<legend>{{check}}</legend>
+					<label class="form-check-label" form="form1">
+						Pass:
+						<input class="form-check-input" type="radio" name="{{task.title}}:{{check}}" value="{{task.title}}.{{check}}.PASS" id="{{ loop.index}}.pass">
+					</label>
+					<label class="form-check-label" form="form1">
+						Fail:
+						<input class="form-check-input" type="radio" name="{{task.title}}:{{check}}" value="{{task.title}}.{{check}}.FAIL" id="{{ loop.index}}.fail">
+					</label>
+				</ul><br>
+				{% endfor %}
+			{% endif %}
+		</fieldset>
+			</div>
+			</div>
+		</li>
+
+		{% endfor %}
+		</ol>
+
+<button class="btn btn-success" type="submit">POST</button>
+</form>
+</div>
+
+</body>
+</html>

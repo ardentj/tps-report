@@ -1,0 +1,39 @@
+
+.container-fluid{
+max-width:1200px;
+margin: auto;
+border: 1px solid  #ffffff;
+}
+ul{
+column-count:2;
+column-rule:dotted 1px #333;
+list-style-type:none;
+}
+.pass{
+color:#008000;
+}
+.fail{
+color:#ff0000;
+}
+
+body{
+background-color:#c0c0c0;
+
+}
+.textarea{
+	height:3em;
+	width:60em;
+}
+
+.Automation{
+	height:60em;
+	width:70em;
+}
+.Reporting{
+	height:60em;
+	width:70em;
+}
+.Fail2Ban{
+	height:5em;
+	width:70em;
+}
