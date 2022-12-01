@@ -1,7 +1,7 @@
 # tps-report
 Somebodies Got a Case of the Mondays
 
-generates an html checklist form from steps stored in a json file
+generates html checklist form from steps stored in a json file
 
 sample JSON not included
 
